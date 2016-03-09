@@ -28,7 +28,7 @@ public class ScoreTest {
         assertFalse(Score.isValid(new int[]{2}));
 
         //nombre de coups supérieur à 21
-        assertFalse(Score.isValid(new int []{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
+        assertFalse(Score.isValid(new int []{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}));
 
         //nombre de strikes imposible
         assertFalse(Score.isValid(new int []{10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}));
@@ -44,5 +44,11 @@ public class ScoreTest {
 
         //boulle bonus non nécessaire
         assertFalse(Score.isValid(new int []{4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 ,4, 4, 4, 4, 4, 4}));
+
+        //strike sans lancers suivants
+        assertFalse(Score.isValid(new int []{10}));
+
+        //spare sans lancers suivants
+        assertFalse(Score.isValid(new int []{5, 5}));
     }
 }

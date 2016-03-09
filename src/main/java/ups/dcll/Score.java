@@ -4,24 +4,42 @@ package ups.dcll;
  * Created by Alexandre Lagane on 3/2/16.
  */
 public abstract class Score {
-    private static final int strikeScore = 10;
-    private static final int spareScore = 10;
-    private static final int framesNumber = 10;
-    private static final int pinsNumber = 10;
+    /**
+     * Score de base pour les strikes.
+     */
+    private static final int STRIKE_SCORE = 10;
+    /**
+     * Score de base pour les spares.
+     */
+    private static final int SPARE_SCORE = 10;
+    /**
+     * Nombre de frames dans une partie.
+     */
+    private static final int FRAMES_NUMBER = 10;
+    /**
+     * Nombre de quilles maximum.
+     */
+    private static final int PINS_NUMBER = 10;
 
-    public static int score(int[] tab) {
+    /**
+     * Calcul du score avec un tableau validé par la méthode
+     * {@link boolean isValid}.
+     * @param tab La séquence de lancers
+     * @return Le score total de la séquence
+     */
+    public static int score(final int[] tab) {
         int total = 0;
         int frame = 0;
         int i = 0;
         int frameScore = 0;
-        while (frame < framesNumber) {
-            if (tab[i] == pinsNumber) { /* Strike */
-                total += strikeScore + tab[i + 1] + tab[i + 2];
+        while (frame < FRAMES_NUMBER) {
+            if (tab[i] == PINS_NUMBER) { /* Strike */
+                total += STRIKE_SCORE + tab[i + 1] + tab[i + 2];
             } else {
                 frameScore = tab[i];
                 i++;
-                if (frameScore + tab[i] == pinsNumber) { /* Spare */
-                    total += spareScore + tab[i + 1];
+                if (frameScore + tab[i] == PINS_NUMBER) { /* Spare */
+                    total += SPARE_SCORE + tab[i + 1];
                 } else { /* Miss */
                     total += frameScore + tab[i];
                 }
@@ -33,30 +51,45 @@ public abstract class Score {
         return total;
     }
 
-    public static boolean isValid(int tab[]) {
-        int test;
+    /**
+     * Vérification de la validité d'une séquence de lancers sous forme de
+     * tableau d'entiers fournies en entrée.
+     * La séquence d'entiers peut avoir une taille supèrieure aux nombres de
+     * lancers si les lancers après le dernier valent 0.
+     * @param tab La séquence de lancers
+     * @return true si la séquence est valide, false sinon
+     */
+    public static boolean isValid(final int[] tab) {
         int frame = 0;
-        int i;
+        int i, j;
         int frameScore = 0;
 
         for (i = 0; i < tab.length; i++) {
-            if (tab[i] < 0 || tab[i] > pinsNumber)
-                return true;
+            if (tab[i] < 0 || tab[i] > PINS_NUMBER) {
+                return false;
+            }
         }
 
-        i = 0;
+        i = 0; j = 0;
         try {
-            while (frame < framesNumber) {
-                if (tab[i] == pinsNumber) { /* Strike */
-                    test = tab[i + 1];
-                    test = tab[i + 2];
+            while (frame < FRAMES_NUMBER) {
+                if (tab[i] == PINS_NUMBER) { /* Strike */
+                    if (i + 2 >= tab.length) {
+                        return false;
+                    }
+                    j = i + 2;
                 } else {
                     frameScore = tab[i];
                     i++;
-                    if (frameScore + tab[i] > pinsNumber)
+                    j = i;
+                    if (frameScore + tab[i] > PINS_NUMBER) {
                         return false;
-                    if (frameScore + tab[i] == pinsNumber) { /* Spare */
-                        test = tab[i + 1];
+                    }
+                    if (frameScore + tab[i] == PINS_NUMBER) { /* Spare */
+                        if (i + 1 >= tab.length) {
+                            return false;
+                        }
+                        j = i + 1;
                     }
                     /* else Miss */
                 }
@@ -65,6 +98,12 @@ public abstract class Score {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
+        }
+
+        for (j++; j < tab.length; j++) {
+            if (tab[j] != 0) {
+                return false;
+            }
         }
 
         return true;
