@@ -6,10 +6,10 @@ package ups.dcll;
 public abstract class Score {
     public static int score(int tab[]) {
         int total = 0;
-        int frameScore = 0;
         int frame = 0;
         int i = 0;
         while (frame < 10) {
+            int frameScore = 0;
             if (tab[i] == 10) { /* Strike */
                 total += 10 + tab[i + 1] + tab[i + 2];
             } else {
