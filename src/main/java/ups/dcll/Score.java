@@ -1,9 +1,9 @@
 package ups.dcll;
 
 /**
- * Created by Alexandre Lagane on 3/2/16.
+ * Classe pour calculer des scores au bowling.
  */
-public abstract class Score {
+public class Score {
     /**
      * Score de base pour les strikes.
      */
@@ -31,7 +31,7 @@ public abstract class Score {
         int total = 0;
         int frame = 0;
         int i = 0;
-        int frameScore = 0;
+        int frameScore;
         while (frame < FRAMES_NUMBER) {
             if (tab[i] == PINS_NUMBER) { /* Strike */
                 total += STRIKE_SCORE + tab[i + 1] + tab[i + 2];
@@ -62,7 +62,7 @@ public abstract class Score {
     public static boolean isValid(final int[] tab) {
         int frame = 0;
         int i, j;
-        int frameScore = 0;
+        int frameScore;
 
         for (i = 0; i < tab.length; i++) {
             if (tab[i] < 0 || tab[i] > PINS_NUMBER) {

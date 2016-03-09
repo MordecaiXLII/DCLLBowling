@@ -5,9 +5,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by Alexandre Lagane on 3/9/16.
+ * Classe de tests de la classe Score.
  */
 public class ScoreTest {
+    private Score s = new Score();
 
     @Test
     public void testScore() throws Exception {
@@ -39,8 +40,11 @@ public class ScoreTest {
         //partie non terminée
         assertFalse(Score.isValid(new int []{4, 5, 9, 1, 5, 3, 7, 0, 4, 2, 1, 9, 3, 3}));
 
-        //scores inférieurs à 0 ou supérieurs à 10
+        //scores inférieurs à 0
         assertFalse(Score.isValid(new int []{-1, 2, -3, 4, -5, 5, 6, 4, 7, 3, 8, -2, 9, 1, 10, -0, 1764, 6, 3}));
+
+        //scores inférieurs à 0 ou supérieurs à 10
+        assertFalse(Score.isValid(new int []{100, 2, -3, 4, -5, 5, 6, 4, 7, 3, 8, -2, 9, 1, 10, -0, 1764, 6, 3}));
 
         //boule bonus non nécessaire
         assertFalse(Score.isValid(new int []{4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 ,4, 4, 4, 4, 4, 4}));
