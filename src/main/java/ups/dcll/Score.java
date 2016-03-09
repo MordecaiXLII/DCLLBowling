@@ -4,7 +4,7 @@ package ups.dcll;
  * Created by Alexandre Lagane on 3/2/16.
  */
 public abstract class Score {
-    public static int score(int tab[]) {est
+    public static int score(int tab[]) {
         int total = 0;
         int frameScore = 0;
         int frame = 0;
