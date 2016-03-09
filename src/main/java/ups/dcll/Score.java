@@ -8,14 +8,14 @@ public abstract class Score {
         int total = 0;
         int frame = 0;
         int i = 0;
+        int frameScore = 0;
         while (frame < 10) {
-            int frameScore = 0;
             if (tab[i] == 10) { /* Strike */
                 total += 10 + tab[i + 1] + tab[i + 2];
             } else {
                 frameScore = tab[i];
                 i++;
-                if (frameScore + tab[i] == 10) {/* Spare */
+                if (frameScore + tab[i] == 10) { /* Spare */
                     total += 10 + tab[i + 1];
                 } else { /* Miss */
                     total = frameScore + tab[i];
@@ -26,5 +26,32 @@ public abstract class Score {
         }
 
         return total;
+    }
+
+    public static boolean isValid(int tab[]) {
+        int test;
+        int frame = 0;
+        int i = 0;
+        int frameScore = 0;
+        try {
+            while (frame < 10) {
+                if (tab[i] == 10) { /* Strike */
+                    test = tab[i + 1];
+                    test = tab[i + 2];
+                } else {
+                    frameScore = tab[i];
+                    i++;
+                    if (frameScore + tab[i] == 10) { /* Spare */
+                        test = tab[i + 1];
+                    } else { /* Miss */ }
+                }
+                i++;
+                frame++;
+            }
+        } catch (ArrayIndexOutOfBoundsException) {
+            return false;
+        }
+
+        return true;
     }
 }
