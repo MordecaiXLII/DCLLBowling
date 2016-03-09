@@ -30,7 +30,7 @@ public class ScoreTest {
         //nombre de coups supérieur à 21
         assertFalse(Score.isValid(new int []{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
 
-        //nombre de strikes imposible
+        //nombre de strikes impossible
         assertFalse(Score.isValid(new int []{10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}));
 
         //frames non cohérentes
@@ -42,7 +42,7 @@ public class ScoreTest {
         //scores inférieurs à 0 ou supérieurs à 10
         assertFalse(Score.isValid(new int []{-1, 2, -3, 4, -5, 5, 6, 4, 7, 3, 8, -2, 9, 1, 10, -0, 1764, 6, 3}));
 
-        //boulle bonus non nécessaire
+        //boule bonus non nécessaire
         assertFalse(Score.isValid(new int []{4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 ,4, 4, 4, 4, 4, 4}));
     }
 }
