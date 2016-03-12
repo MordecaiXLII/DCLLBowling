@@ -3,7 +3,7 @@ package ups.dcll;
 /**
  * Classe pour calculer des scores au bowling.
  */
-public class Score {
+public abstract class Score {
     /**
      * Score de base pour les strikes.
      */
